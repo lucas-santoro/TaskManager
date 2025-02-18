@@ -1,0 +1,55 @@
+import { Request, Response } from "express";
+import TaskManager from "../services/TaskManager";
+
+class TaskController 
+{
+    getAllTasks(req: Request, res: Response): void 
+    {
+        res.json(TaskManager.getAllTasks());
+    }
+
+    getTaskById(req: Request, res: Response): void 
+    {
+        const task = TaskManager.getTaskById(Number(req.params.id));
+        if (!task) 
+        {
+            res.status(404).json({ message: "Tarefa não encontrada" });
+            return;
+        }
+
+        res.json(task);
+    }
+
+    createTask(req: Request, res: Response): void 
+    {
+        const { title, description, status } = req.body;
+        const task = TaskManager.createTask(title, description, status);
+        res.status(201).json(task);
+    }
+
+    updateTask(req: Request, res: Response): void 
+    {
+        const updatedTask = TaskManager.updateTask(Number(req.params.id), req.body);
+        if (!updatedTask) 
+        {
+            res.status(404).json({ message: "Tarefa não encontrada" });
+            return;
+        }
+
+        res.json(updatedTask);
+    }
+
+    deleteTask(req: Request, res: Response): void 
+    {
+        const success = TaskManager.deleteTask(Number(req.params.id));
+        if (!success) 
+        {
+            res.status(404).json({ message: "Tarefa não encontrada" });
+            return;
+        }
+
+        res.status(204).send();
+    }
+}
+
+export default new TaskController();
