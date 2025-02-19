@@ -1,49 +1,43 @@
 import { TaskModel } from "../models/TaskModel";
+import client from "../database";
 
 class TaskManager 
 {
-    private tasks: TaskModel[] = [];
-    private nextId: number = 1;
-
-    getAllTasks(): TaskModel[] 
+    async getAllTasks(): Promise<TaskModel[]> 
     {
-        return this.tasks;
+        const result = await client.query("SELECT * FROM tasks");
+        return result.rows;
     }
 
-    getTaskById(id: number): TaskModel | undefined 
+    async getTaskById(id: number): Promise<TaskModel | null> 
     {
-        return this.tasks.find(task => task.id === id);
+        const result = await client.query("SELECT * FROM tasks WHERE id = $1", [id]);
+        return result.rows[0] || null;
     }
 
-    createTask(title: string, description: string, status?: string): TaskModel 
+    async createTask(title: string, description: string, status: string): Promise<TaskModel> 
     {
-        const task: TaskModel = { 
-            id: this.nextId++, 
-            title, 
-            description, 
-            status: (status as "pendente" | "em progresso" | "concluída") || "pendente",
-            createdAt: new Date() 
-        };
-        this.tasks.push(task);
-        return task;
+        const result = await client.query(
+            "INSERT INTO tasks (title, description, status, created_at) VALUES ($1, $2, $3, NOW()) RETURNING *",
+            [title, description, status]
+        );
+        return result.rows[0];
     }
 
-    updateTask(id: number, updatedFields: Partial<TaskModel>): TaskModel | null 
+    async updateTask(id: number, updatedFields: Partial<TaskModel>): Promise<TaskModel | null> 
     {
-        const task = this.getTaskById(id);
-        if (!task) return null;
-
-        Object.assign(task, updatedFields);
-        return task;
+        const { title, description, status } = updatedFields;
+        const result = await client.query(
+            "UPDATE tasks SET title = $1, description = $2, status = $3 WHERE id = $4 RETURNING *",
+            [title, description, status, id]
+        );
+        return result.rows[0] || null;
     }
 
-    deleteTask(id: number): boolean 
+    async deleteTask(id: number): Promise<boolean> 
     {
-        const index = this.tasks.findIndex(task => task.id === id);
-        if (index === -1) return false;
-
-        this.tasks.splice(index, 1);
-        return true;
+        const result = await client.query("DELETE FROM tasks WHERE id = $1", [id]);
+        return result.rowCount !== null && result.rowCount > 0;
     }
 }
 
