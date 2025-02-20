@@ -14,5 +14,5 @@ app.use("/tasks", taskRoutes);
 
 const PORT = process.env.SERVER_PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });

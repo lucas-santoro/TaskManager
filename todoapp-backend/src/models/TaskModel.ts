@@ -3,6 +3,6 @@ export interface TaskModel
     id: number;
     title: string;
     description: string;
-    status: "pendente" | "em progresso" | "concluída";
+    status: "pending" | "in progress" | "completed";
     createdAt: Date;
 }

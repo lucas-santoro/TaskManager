@@ -8,7 +8,7 @@ const client = new Client({
 });
 
 client.connect()
-    .then(() => console.log("Conectado ao PostgreSQL"))
-    .catch((err: Error) => console.error("Erro ao conectar ao PostgreSQL", err.stack));
+    .then(() => console.log("Connected to PostgreSQL"))
+    .catch((err: Error) => console.error("Error connecting to PostgreSQL", err.stack));
 
 export default client;

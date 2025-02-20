@@ -13,7 +13,7 @@ class TaskController
         const task = TaskManager.getTaskById(Number(req.params.id));
         if (!task) 
         {
-            res.status(404).json({ message: "Tarefa não encontrada" });
+            res.status(404).json({ message: "Task not found" });
             return;
         }
 
@@ -32,7 +32,7 @@ class TaskController
         const updatedTask = TaskManager.updateTask(Number(req.params.id), req.body);
         if (!updatedTask) 
         {
-            res.status(404).json({ message: "Tarefa não encontrada" });
+            res.status(404).json({ message: "Task not found" });
             return;
         }
 
@@ -44,7 +44,7 @@ class TaskController
         const success = TaskManager.deleteTask(Number(req.params.id));
         if (!success) 
         {
-            res.status(404).json({ message: "Tarefa não encontrada" });
+            res.status(404).json({ message: "Task not found" });
             return;
         }
 
