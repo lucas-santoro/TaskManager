@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import TaskManager from "../services/TaskManager";
 
+/**
+ * @brief Handles HTTP requests related to tasks.
+ * @details Processes requests and interacts with TaskManager to perform operations.
+ */
 class TaskController 
 {
     getAllTasks(req: Request, res: Response): void 

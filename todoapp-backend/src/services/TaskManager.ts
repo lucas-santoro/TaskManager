@@ -1,6 +1,10 @@
 import { TaskModel } from "../models/TaskModel";
 import client from "../database";
 
+/**
+ * @brief Manages task operations.
+ * @details Handles task creation, retrieval, updating, and deletion using PostgreSQL.
+ */
 class TaskManager 
 {
     async getAllTasks(): Promise<TaskModel[]> 

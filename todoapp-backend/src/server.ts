@@ -13,6 +13,11 @@ app.use(express.json());
 app.use("/tasks", taskRoutes);
 
 const PORT = process.env.SERVER_PORT || 5000;
+
+/**
+ * @brief Starts the Express server.
+ * @details The server listens on the port defined in the environment variables or defaults to 5000.
+ */
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
