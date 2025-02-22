@@ -23,6 +23,7 @@ const Login = () => {
         try 
         {
             const response = await api.post("/api/auth/login", { identifier, password });
+            console.log("🔑 Token recebido:", response.data.token);
             localStorage.setItem("token", response.data.token);
             navigate("/tasks");
         } 

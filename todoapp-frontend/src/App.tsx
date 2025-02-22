@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Tasks from "./pages/Tasks";
 
 /**
  * @brief Main application component.
@@ -13,7 +14,7 @@ const App = () => {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/tasks" element={<Home />} />
+                <Route path="/tasks" element={<Tasks />} />
                 <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </Router>

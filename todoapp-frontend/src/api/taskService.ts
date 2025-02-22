@@ -1,22 +1,58 @@
 import api from "../api/apiClient";
 
+export interface Task 
+{
+    id: number;
+    title: string;
+    description: string;
+    status: string;
+    created_at: string;
+}
+
+export type NewTask = {
+    title: string;
+    description: string;
+    status: "pending" | "in progress" | "concluded";
+};
+
 /**
- * @brief Fetches all tasks from the API.
- * @return A promise resolving to an array of tasks.
+ * @brief Fetches all tasks for the authenticated user.
+ * @return A promise resolving to the list of tasks.
  */
-export const getTasks = async () => {
-    const response = await api.get("/tasks");
-    return response.data;
+export const getTasks = async (): Promise<Task[] | null> => 
+{
+    try 
+    {
+        const response = await api.get("/api/tasks");
+        return response.data;
+    } 
+    catch (error) 
+    {
+        console.error("Error fetching tasks:", error);
+        return null;
+    }
 };
 
 /**
  * @brief Creates a new task.
- * @param task The task object to be created.
+ * @param taskData The task object to be created.
  * @return A promise resolving to the created task.
  */
-export const createTask = async (task: { title: string; description: string; status: string }) => {
-    const response = await api.post("/tasks", task);
-    return response.data;
+export const createTask = async (taskData: NewTask) => 
+{
+    try 
+    {
+        const token = localStorage.getItem("token");
+        const response = await api.post("/api/tasks", taskData, {
+            headers: { Authorization: `Bearer ${token}` }, 
+        });
+        return response.data;
+    } 
+    catch (error) 
+    {
+        console.error("Error adding task:", error);
+        return null;
+    }
 };
 
 /**
@@ -25,9 +61,21 @@ export const createTask = async (task: { title: string; description: string; sta
  * @param updates The fields to update.
  * @return A promise resolving to the updated task.
  */
-export const updateTask = async (id: number, updates: Partial<{ title: string; description: string; status: string }>) => {
-    const response = await api.put(`/tasks/${id}`, updates);
-    return response.data;
+export const updateTask = async (id: number, updates: Partial<{ title: string; description: string; status: string }>) => 
+{
+    try 
+    {
+        const token = localStorage.getItem("token");
+        const response = await api.put(`/api/tasks/${id}`, updates, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+        return response.data;
+    } 
+    catch (error) 
+    {
+        console.error("Error updating task:", error);
+        return null;
+    }
 };
 
 /**
@@ -35,6 +83,17 @@ export const updateTask = async (id: number, updates: Partial<{ title: string; d
  * @param id The ID of the task to delete.
  * @return A promise resolving to void.
  */
-export const deleteTask = async (id: number) => {
-    await api.delete(`/tasks/${id}`);
+export const deleteTask = async (id: number) => 
+{
+    try 
+    {
+        const token = localStorage.getItem("token");
+        await api.delete(`/api/tasks/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+    } 
+    catch (error) 
+    {
+        console.error("Error deleting task:", error);
+    }
 };

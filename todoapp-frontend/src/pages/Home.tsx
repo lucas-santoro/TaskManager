@@ -1,26 +1,29 @@
-import { useState } from "react";
-import TaskList from "../components/TaskList";
-import TaskForm from "../components/TaskForm";
+import { useEffect, useState } from "react";
+import { getTasks, Task } from "../api/taskService";
 
-/**
- * @brief Main page displaying tasks.
- * @details Combines TaskList and TaskForm for task management.
- */
 const Home = () => {
-    const [taskUpdated, setTaskUpdated] = useState(false);
+    const [tasks, setTasks] = useState<Task[]>([]); // 🔹 Agora TypeScript sabe que é um array de Tasks
 
-    /**
-     * @brief Triggers a re-fetch of tasks when an update occurs.
-     */
-    const handleTaskUpdate = () => {
-        setTaskUpdated(prev => !prev);
-    };
+    useEffect(() => {
+        const fetchTasks = async () => {
+            const data = await getTasks();
+            if (data) 
+            {
+                setTasks(data);
+            }
+        };
+
+        fetchTasks();
+    }, []);
 
     return (
         <div>
-            <h1>Task Manager</h1>
-            <TaskForm onTaskUpdated={handleTaskUpdate} />
-            <TaskList key={taskUpdated.toString()} />
+            <h2>My Tasks</h2>
+            <ul>
+                {tasks.map((task) => (
+                    <li key={task.id}>{task.title}</li> // 🔹 Agora o TS reconhece "id" e "title"
+                ))}
+            </ul>
         </div>
     );
 };

@@ -7,9 +7,10 @@ import TaskManager from "../services/TaskManager";
  */
 class TaskController 
 {
-    getAllTasks(req: Request, res: Response): void 
+    async getAllTasks(req: Request, res: Response) 
     {
-        res.json(TaskManager.getAllTasks());
+        const tasks = await TaskManager.getAllTasks();
+        res.json(tasks);
     }
 
     getTaskById(req: Request, res: Response): void 
