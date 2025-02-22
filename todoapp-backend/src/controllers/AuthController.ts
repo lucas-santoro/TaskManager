@@ -9,24 +9,25 @@ class AuthController
 {
     async register(req: Request, res: Response): Promise<void> 
     {
-        const { name, email, password } = req.body;
-
-        if (!name || !email || !password) 
+        const { name, nickname, email, password } = req.body;
+    
+        if (!name || !nickname || !email || !password) 
         {
             res.status(400).json({ message: "All fields are required." });
             return;
         }
-
-        const user = await AuthManager.register(name, email, password);
-
+    
+        const user = await AuthManager.register(name, nickname, email, password);
+    
         if (!user) 
         {
-            res.status(400).json({ message: "Failed to register user. Email might already be in use." });
+            res.status(400).json({ message: "Failed to register user. Email or nickname might already be in use." });
             return;
         }
-
+    
         res.status(201).json(user);
     }
+    
 
     async login(req: Request, res: Response): Promise<void> 
     {

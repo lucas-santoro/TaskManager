@@ -9,17 +9,17 @@ import client from "../database";
  */
 class AuthManager 
 {
-    async register(name: string, email: string, password: string): Promise<Omit<UserModel, "password"> | null> 
+    async register(name: string, nickname: string, email: string, password: string): Promise<Omit<UserModel, "password"> | null> 
     {
         const hashedPassword = await bcrypt.hash(password, 10);
-
+    
         try 
         {
             const result = await client.query(
-                "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email, created_at",
-                [name, email, hashedPassword]
+                "INSERT INTO users (name, nickname, email, password) VALUES ($1, $2, $3, $4) RETURNING id, name, nickname, email, created_at",
+                [name, nickname, email, hashedPassword]
             );
-
+    
             return result.rows[0];
         } 
         catch (error) 
@@ -27,11 +27,15 @@ class AuthManager
             console.error("Error registering user:", error);
             return null;
         }
-    }
+    }    
 
-    async login(email: string, password: string): Promise<string | null> 
+    async login(identifier: string, password: string): Promise<string | null> 
     {
-        const result = await client.query("SELECT * FROM users WHERE email = $1", [email]);
+        const result = await client.query(
+            "SELECT * FROM users WHERE email = $1 OR nickname = $1",
+            [identifier]
+        );
+
         const user = result.rows[0];
 
         if (!user || !(await bcrypt.compare(password, user.password))) 
@@ -39,7 +43,12 @@ class AuthManager
             return null;
         }
 
-        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET as string, { expiresIn: "1h" });
+        const token = jwt.sign(
+            { id: user.id, nickname: user.nickname, email: user.email },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "1h" }
+        );
+
         return token;
     }
 }
