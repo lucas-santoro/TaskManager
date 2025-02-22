@@ -1,16 +1,17 @@
 import { Router } from "express";
 import TaskController from "../controllers/TaskController";
+import authMiddleware from "../middleware/AuthMiddleware";
 
 const router = Router();
 
 /**
- * @brief Defines the task-related API routes.
- * @details Each route is mapped to a method in TaskController.
+ * @brief Defines task-related routes.
+ * @details These routes are protected and require authentication.
  */
-router.get("/", TaskController.getAllTasks);
-router.get("/:id", TaskController.getTaskById);
-router.post("/", TaskController.createTask);
-router.put("/:id", TaskController.updateTask);
-router.delete("/:id", TaskController.deleteTask);
+router.get("/", authMiddleware, TaskController.getAllTasks);
+router.get("/:id", authMiddleware, TaskController.getTaskById);
+router.post("/", authMiddleware, TaskController.createTask);
+router.put("/:id", authMiddleware, TaskController.updateTask);
+router.delete("/:id", authMiddleware, TaskController.deleteTask);
 
 export default router;
