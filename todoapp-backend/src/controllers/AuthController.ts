@@ -31,15 +31,15 @@ class AuthController
 
     async login(req: Request, res: Response): Promise<void> 
     {
-        const { email, password } = req.body;
+        const { identifier, password } = req.body;
 
-        if (!email || !password) 
+        if (!identifier || !password) 
         {
             res.status(400).json({ message: "Email and password are required." });
             return;
         }
 
-        const token = await AuthManager.login(email, password);
+        const token = await AuthManager.login(identifier, password);
 
         if (!token) 
         {

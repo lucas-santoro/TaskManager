@@ -44,7 +44,7 @@ class AuthManager
         }
 
         const token = jwt.sign(
-            { id: user.id, nickname: user.nickname, email: user.email },
+            { id: user.id, identifier: user.nickname || user.email },
             process.env.JWT_SECRET as string,
             { expiresIn: "1h" }
         );
