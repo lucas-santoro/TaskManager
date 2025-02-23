@@ -9,4 +9,6 @@ export interface TaskModel
     description: string;
     status: "pending" | "in progress" | "completed";
     createdAt: Date;
+    userId: number;
+    priority: number;
 }

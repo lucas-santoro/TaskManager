@@ -1,22 +1,21 @@
 import { useState } from "react";
 import { createTask, updateTask, NewTask } from "../api/taskService";
 
-/**
- * @brief Form component for creating and updating tasks.
- * @details Allows users to input task details and submit to the API.
- */
-const TaskForm = ({ taskToEdit, onTaskUpdated }: { taskToEdit?: { id: number; title: string; description: string; status: string }, onTaskUpdated: () => void }) => 
+interface TaskFormProps 
+{
+    taskToEdit?: { id: number; title: string; description: string; status: string; priority: number };
+    onTaskUpdated: () => void;
+}
+
+const TaskForm = ({ taskToEdit, onTaskUpdated }: TaskFormProps) => 
 {
     const [title, setTitle] = useState(taskToEdit?.title || "");
     const [description, setDescription] = useState(taskToEdit?.description || "");
     const [status, setStatus] = useState<"pending" | "in progress" | "concluded">(
         (taskToEdit?.status as "pending" | "in progress" | "concluded") || "pending"
     );
+    const [priority, setPriority] = useState(taskToEdit?.priority || 1);
 
-    /**
-     * @brief Handles form submission for creating or updating a task.
-     * @param event The form submission event.
-     */
     const handleSubmit = async (event: React.FormEvent) => 
     {
         event.preventDefault();
@@ -25,11 +24,11 @@ const TaskForm = ({ taskToEdit, onTaskUpdated }: { taskToEdit?: { id: number; ti
         {
             if (taskToEdit) 
             {
-                await updateTask(taskToEdit.id, { title, description, status });
+                await updateTask(taskToEdit.id, { title, description, status, priority });
             } 
             else 
             {
-                const newTask: NewTask = { title, description, status };
+                const newTask: NewTask = { title, description, status, priority };
                 await createTask(newTask);
             }
 
@@ -44,16 +43,41 @@ const TaskForm = ({ taskToEdit, onTaskUpdated }: { taskToEdit?: { id: number; ti
     return (
         <form onSubmit={handleSubmit}>
             <h2>{taskToEdit ? "Edit Task" : "Create Task"}</h2>
-            <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} required />
-            <textarea placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-            
-            <select value={status} onChange={(e) => setStatus(e.target.value as "pending" | "in progress" | "concluded")}>
+
+            <input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+            />
+
+            <textarea
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+            />
+
+            <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value as "pending" | "in progress" | "concluded")}
+            >
                 <option value="pending">Pending</option>
                 <option value="in progress">In Progress</option>
                 <option value="concluded">Concluded</option>
             </select>
 
-            <button type="submit">{taskToEdit ? "Update" : "Create"}</button>
+            <input
+                type="number"
+                placeholder="Priority"
+                value={priority}
+                onChange={(e) => setPriority(Number(e.target.value))}
+                required
+            />
+
+            <button type="submit">
+                {taskToEdit ? "Update" : "Create"}
+            </button>
         </form>
     );
 };

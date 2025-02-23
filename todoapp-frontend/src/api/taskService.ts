@@ -7,12 +7,14 @@ export interface Task
     description: string;
     status: string;
     created_at: string;
+    priority: number;
 }
 
 export type NewTask = {
     title: string;
     description: string;
     status: "pending" | "in progress" | "concluded";
+    priority: number;
 };
 
 /**
@@ -61,22 +63,27 @@ export const createTask = async (taskData: NewTask) =>
  * @param updates The fields to update.
  * @return A promise resolving to the updated task.
  */
-export const updateTask = async (id: number, updates: Partial<{ title: string; description: string; status: string }>) => 
-{
-    try 
-    {
+export const updateTask = async (
+    id: number, 
+    updates: Partial<{
+        title: string; 
+        description: string; 
+        status: "pending" | "in progress" | "concluded"; 
+        priority: number;
+    }>
+) => {
+    try {
         const token = localStorage.getItem("token");
         const response = await api.put(`/api/tasks/${id}`, updates, {
             headers: { Authorization: `Bearer ${token}` },
         });
         return response.data;
-    } 
-    catch (error) 
-    {
+    } catch (error) {
         console.error("Error updating task:", error);
         return null;
     }
 };
+
 
 /**
  * @brief Deletes a task by ID.

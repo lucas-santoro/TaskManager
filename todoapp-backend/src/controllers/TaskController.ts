@@ -1,5 +1,6 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import TaskManager from "../services/TaskManager";
+import { AuthRequest } from "../middleware/AuthMiddleware";
 
 /**
  * @brief Handles HTTP requests related to tasks.
@@ -7,50 +8,85 @@ import TaskManager from "../services/TaskManager";
  */
 class TaskController 
 {
-    async getAllTasks(req: Request, res: Response) 
+    async getAllTasks(req: AuthRequest, res: Response) 
     {
-        const tasks = await TaskManager.getAllTasks();
+        if (!req.user) 
+        {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const tasks = await TaskManager.getAllTasks(req.user.id);
         res.json(tasks);
     }
 
-    getTaskById(req: Request, res: Response): void 
+    async getTaskById(req: AuthRequest, res: Response) 
     {
-        const task = TaskManager.getTaskById(Number(req.params.id));
+        if (!req.user) 
+        {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const task = await TaskManager.getTaskById(Number(req.params.id), req.user.id);
         if (!task) 
         {
-            res.status(404).json({ message: "Task not found" });
-            return;
+            return res.status(404).json({ message: "Task not found" });
         }
 
         res.json(task);
     }
 
-    createTask(req: Request, res: Response): void 
+    async createTask(req: AuthRequest, res: Response) 
     {
-        const { title, description, status } = req.body;
-        const task = TaskManager.createTask(title, description, status);
+        if (!req.user) 
+        {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+    
+        const { title, description, status, priority } = req.body;
+    
+        if (!title || !description || priority === undefined) 
+        {
+            return res.status(400).json({ message: "Missing required fields" });
+        }
+    
+        const task = await TaskManager.createTask(
+            title, 
+            description, 
+            status, 
+            req.user.id,
+            priority
+        );
+        
         res.status(201).json(task);
     }
-
-    updateTask(req: Request, res: Response): void 
+    
+    async updateTask(req: AuthRequest, res: Response) 
     {
-        const updatedTask = TaskManager.updateTask(Number(req.params.id), req.body);
+        if (!req.user) 
+        {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const updatedTask = await TaskManager.updateTask(Number(req.params.id), req.body, req.user.id);
         if (!updatedTask) 
         {
-            res.status(404).json({ message: "Task not found" });
-            return;
+            return res.status(404).json({ message: "Task not found or unauthorized" });
         }
 
         res.json(updatedTask);
     }
 
-    deleteTask(req: Request, res: Response): void 
+    async deleteTask(req: AuthRequest, res: Response) 
     {
-        const success = TaskManager.deleteTask(Number(req.params.id));
+        if (!req.user) 
+        {
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+
+        const success = await TaskManager.deleteTask(Number(req.params.id), req.user.id);
         if (!success) 
         {
-            res.status(404).json({ message: "Task not found" });
-            return;
+            return res.status(404).json({ message: "Task not found or unauthorized" });
         }
 
         res.status(204).send();
