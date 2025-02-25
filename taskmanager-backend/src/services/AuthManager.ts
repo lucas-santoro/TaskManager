@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { UserModel } from "../models/UserModel";
-import client from "../database";
+import client from "../database/database";
 
 /**
  * @brief Manages authentication logic.
