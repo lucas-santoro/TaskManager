@@ -34,7 +34,7 @@ const TaskList = () => {
                 />
             ) : (
                 <button onClick={() => setIsCreating(true)}>
-                    ➕ Adicionar Nova Tarefa
+                    Add new task
                 </button>
             )}
 

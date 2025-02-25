@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { getTasks, Task } from "../api/taskService";
 
 const Home = () => {
-    const [tasks, setTasks] = useState<Task[]>([]); // 🔹 Agora TypeScript sabe que é um array de Tasks
-
+    const [tasks, setTasks] = useState<Task[]>([]);
     useEffect(() => {
         const fetchTasks = async () => {
             const data = await getTasks();
@@ -21,7 +20,7 @@ const Home = () => {
             <h2>My Tasks</h2>
             <ul>
                 {tasks.map((task) => (
-                    <li key={task.id}>{task.title}</li> // 🔹 Agora o TS reconhece "id" e "title"
+                    <li key={task.id}>{task.title}</li>
                 ))}
             </ul>
         </div>
