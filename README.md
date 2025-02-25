@@ -1,39 +1,122 @@
-# Task Manager  
+# Task Manager
 
-![Task Manager](https://via.placeholder.com/600x200.png?text=Task+Manager)  
-
-[![Version](https://img.shields.io/badge/version-1.0.0-blue)]()  
-[![License](https://img.shields.io/badge/license-MIT-green)]()  
-[![Build](https://img.shields.io/badge/build-passing-brightgreen)]()  
 
 ## 🚀 About
 
-**Task Manager** is a full-stack task management application designed not only for practical use but also as a learning resource for new developers. The project is fully documented, making it an excellent reference for beginners who want to understand how a complete full-stack application works.  
+**Task Manager** is a full-stack task management application designed for both practical use and as a learning resource for new developers. The project is fully documented, making it an excellent reference for those who want to understand how a complete full-stack application works.
 
-It includes features such as task creation, viewing, updating, and deletion, along with authentication and route protection. The goal is for developers to explore the code, modify it as they see fit, and use it as a foundation for their own projects.  
+### 🌟 Features
+
+- User authentication with **JWT**
+- Secure route protection
+- Task creation, updating, and deletion
+- Task prioritization and status management
+- Fully documented API & database structure
 
 Whether you're looking to learn, contribute, or extend its functionality, **Task Manager** is open for experimentation.
 
-## 📦 Technologies  
+---
 
-- **Backend:** Node.JS, TypeScript, PostgreSQL  
-- **Frontend:** React, TypeScript  
-- **Authentication:** JWT  
+## 📦 Technologies
 
-## 📖 Documentation  
+### **Backend**
 
-Full documentation is available in the [`docs/`](./docs/) folder:  
+- **Node.js** with **TypeScript**
+- **Express.js** for API handling
+- **PostgreSQL** for database management
+- **JWT Authentication** for secure access
 
-- [📌 API & Endpoints](./docs/api.md)  
-- [🗄️ Database Structure](./docs/database.md)  
-- [🎨 Frontend & User Flow](./docs/frontend.md)  
-- [🔑 Authentication & Route Protection](./docs/authentication.md)  
-- [🤝 Contribution Guide](./docs/contribution.md)  
-- [❓ FAQ](./docs/faq.md)  
+### **Frontend**
 
-## ⚡ How to Run the Project  
+- **React.js** with **TypeScript**
+- **React Router** for navigation
+- **Axios** for API requests
+- **CSS Modules** for styling
 
-### 1️⃣ Clone the repository  
+---
+
+## 📖 Documentation
+
+Full documentation is available in the [`docs/`](./docs/) folder:
+
+- [📌 API & Endpoints](./docs/api.md)
+- [🗄️ Database Structure](./docs/database.md)
+- [🎨 Frontend & User Flow](./docs/frontend.md)
+- [🔑 Authentication & Route Protection](./docs/authentication.md)
+- [🤝 Contribution Guide](./docs/contribution.md)
+- [❓ FAQ](./docs/faq.md)
+
+---
+
+## ⚡ How to Run the Project
+
+### 1️⃣ Clone the repository
+
 ```sh
 git clone https://github.com/lucas-santoro/TaskManager.git
-cd task-manager
+cd TaskManager
+```
+
+### 2️⃣ Install dependencies
+
+- **Backend:**
+
+```sh
+cd taskmanager-backend
+npm install
+```
+
+- **Frontend:**
+
+```sh
+cd ../taskmanager-frontend
+npm install
+```
+
+### 3️⃣ Set up environment variables
+
+Copy the example `.env` files and configure them:
+
+```sh
+cp taskmanager-backend/.env.example taskmanager-backend/.env
+cp taskmanager-frontend/.env.example taskmanager-frontend/.env
+```
+
+### 4️⃣ Set up the database
+
+Before running the backend, make sure the database is set up correctly:
+
+```sh
+psql -U your_user -d your_database -f taskmanager-backend/database/schema.sql
+```
+
+This command will create all necessary tables as defined in the schema file.
+
+### 5️⃣ Start the project
+
+- **Backend:**
+
+```sh
+npm run dev
+```
+
+- **Frontend:**
+
+```sh
+npm run dev
+```
+
+The frontend will be available at `http://localhost:5173/`.
+
+---
+
+## 🤝 Contribution
+
+Want to contribute? Check out our [contribution guide](./docs/contribution.md).
+
+---
+
+## 📜 License
+
+This project is licensed under the **MIT License**. See the [`LICENSE`](./LICENSE) file for more details.
+
