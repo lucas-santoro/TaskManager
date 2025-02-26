@@ -1,10 +1,11 @@
-/* Garante que a página ocupe toda a tela sem overflow */
+/* Ensures the page takes the full screen without overflow */
 body, html {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Remove scroll lateral */
+    overflow-x: hidden;
 }
 
+/* Main container */
 .tasks-container {
     display: flex;
     flex-direction: column;
@@ -17,10 +18,9 @@ body, html {
     text-align: center;
     padding: 40px 20px;
     box-sizing: border-box;
-    overflow: hidden; /* Remove possíveis scrolls indesejados */
 }
 
-/* Título e subtítulo */
+/* Title and subtitle */
 .tasks-title {
     font-size: 2rem;
     font-weight: bold;
@@ -30,80 +30,81 @@ body, html {
     font-size: 1.2rem;
     font-weight: normal;
     color: #b0b0b0;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
-/* Lista de tarefas */
+/* Task list container */
 .task-list-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     margin-top: 20px;
 }
 
-/* Botão de criar tarefa */
-.create-task-button {
-    width: 100%;
-    height: 45px;
-    border-radius: 50px;
-    border: none;
-    background: #e0e0e0;
-    color: #4d4d4d;
-    font-size: 18px;
-    cursor: pointer;
-    box-shadow: inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff;
-    transition: all 0.2s ease-in-out;
-    margin-top: 15px;
-}
-
-.create-task-button:hover {
-    box-shadow: inset 2px 2px 5px #bcbcbc, inset -2px -2px 5px #ffffff, 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff;
-}
-
-/* Container do formulário de criação */
+/* Task creation form - Positioned ABOVE the task list */
 .create-task-container {
+    width: 100%;
+    max-width: 700px;
+    background-color: #1e1e1e;
+    padding: 15px;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 600px;
-    margin-top: 20px;
-    background-color: #1e1e1e;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: inset 2px 2px 5px #0e0e0e, inset -2px -2px 5px #262626;
+    margin-bottom: 20px;
 }
 
-/* Inputs e selects do formulário */
+/* Task creation form layout */
 .create-task-form {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    align-items: center;
     gap: 10px;
-    width: 100%;
+    justify-content: space-between;
 }
 
-.create-task-input {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
+/* Inputs and select dropdown */
+.create-task-input, .create-task-select {
+    flex: 1;
+    background-color: #272727;
     border: none;
-    border-radius: 8px;
-    background-color: #2a2a2a;
+    padding: 10px 15px;
+    border-radius: 20px;
     color: white;
+    font-size: 15px;
+    box-shadow: inset 2px 2px 5px #111, inset -2px -2px 5px #333;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+    min-width: 0; /* Prevents inputs from stretching */
+}
+
+/* Adjusts priority input width */
+.create-task-input.priority {
+    flex: 0.5;
+    min-width: 70px;
+}
+
+/* Ensures the Create button fits correctly */
+.create-task-button {
+    padding: 10px 20px;
     font-size: 16px;
-}
-
-.create-task-input::placeholder {
-    color: #aaa;
-}
-
-.create-task-select {
-    width: 100%;
-    height: 40px;
-    padding: 8px;
+    color: #555;
+    background: #e8e8e8;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff;
+    transition: all 0.2s ease-in-out;
     border: none;
-    border-radius: 8px;
-    background-color: #2a2a2a;
-    color: white;
-    font-size: 16px;
+    flex-shrink: 0;
+    min-width: 90px;
+}
+
+.create-task-button:hover {
+    box-shadow: inset 2px 2px 6px #bcbcbc, inset -2px -2px 6px #ffffff, 2px 2px 6px #0a0a0a, -2px -2px 6px #2a2a2a;
+}
+
+.create-task-button:active {
+    transform: scale(0.98);
+    box-shadow: inset 1px 1px 4px #bcbcbc, inset -1px -1px 4px #ffffff;
 }
