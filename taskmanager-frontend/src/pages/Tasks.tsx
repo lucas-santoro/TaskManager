@@ -111,7 +111,7 @@ const Tasks = () =>
                     <input 
                         type="number" 
                         placeholder="Priority" 
-                        className="create-task-input" 
+                        className="create-task-input priority" 
                         value={priority} 
                         onChange={(e) => setPriority(e.target.value)}
                         required 

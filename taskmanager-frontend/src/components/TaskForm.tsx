@@ -41,26 +41,28 @@ const TaskForm = ({ taskToEdit, onTaskUpdated }: TaskFormProps) =>
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>{taskToEdit ? "Edit Task" : "Create Task"}</h2>
-
+        <form onSubmit={handleSubmit} className="create-task-form">
             <input
                 type="text"
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
+                className="create-task-input"
             />
 
-            <textarea
+            <input
+                type="text"
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                className="create-task-input"
             />
 
             <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value as "pending" | "in progress" | "concluded")}
+                className="create-task-select"
             >
                 <option value="pending">Pending</option>
                 <option value="in progress">In Progress</option>
@@ -73,9 +75,10 @@ const TaskForm = ({ taskToEdit, onTaskUpdated }: TaskFormProps) =>
                 value={priority}
                 onChange={(e) => setPriority(Number(e.target.value))}
                 required
+                className="create-task-input priority"
             />
 
-            <button type="submit">
+            <button type="submit" className="create-task-button">
                 {taskToEdit ? "Update" : "Create"}
             </button>
         </form>
