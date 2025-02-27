@@ -125,7 +125,7 @@ const Tasks = () =>
                 {tasks.length === 0 ? (
                     <p>No tasks found. Add a new one!</p>
                 ) : (
-                    <ul>
+                    <div className="task-cards">
                         {tasks.map((task) => (
                             <TaskItem
                                 key={task.id}
@@ -133,7 +133,7 @@ const Tasks = () =>
                                 onTaskUpdated={fetchTasks}
                             />
                         ))}
-                    </ul>
+                    </div>
                 )}
             </div>
         </div>
