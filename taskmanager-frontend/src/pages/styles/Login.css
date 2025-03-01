@@ -97,6 +97,7 @@
     border-radius: 12px;
     background: var(--input-color);
     color: white;
+    box-sizing: border-box; 
     outline: none;
     font-size: 14px;
     margin: 0 auto;
