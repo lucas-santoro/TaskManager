@@ -231,6 +231,11 @@ body, html {
         16px 12px 24px rgba(255, 0, 0, 0.2);
 }
 
+.task-card {
+    margin: 20px auto;
+}
+
+
 /* Responsividade para telas menores */
 @media (max-width: 500px) {
     .task-card {
