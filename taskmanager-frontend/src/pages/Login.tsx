@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 import api from "../api/apiClient";
 
 /**
@@ -53,6 +54,13 @@ const Login = () => {
                 <button type="submit">Login</button>
             </form>
             {error && <p>{error}</p>}
+    
+            <p>
+                Don't have an account?{" "}
+                <Link to="/register" style={{ textDecoration: "underline" }}>
+                    Register
+                </Link>
+            </p>
         </div>
     );
 };
