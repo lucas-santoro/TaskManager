@@ -29,7 +29,7 @@ class AuthManager
         }
     }    
 
-    async login(identifier: string, password: string): Promise<string | null> 
+    async login(identifier: string, password: string): Promise<{ accessToken: string, refreshToken: string } | null>
     {
         const result = await client.query(
             "SELECT * FROM users WHERE email = $1 OR nickname = $1",
@@ -43,13 +43,19 @@ class AuthManager
             return null;
         }
 
-        const token = jwt.sign(
+        const accessToken  = jwt.sign(
             { id: user.id, identifier: user.nickname || user.email },
             process.env.JWT_SECRET as string,
             { expiresIn: "1h" }
         );
 
-        return token;
+        const refreshToken = jwt.sign(
+            { id: user.id },
+            process.env.JWT_SECRET as string,
+            { expiresIn: "7d" }
+        );
+
+        return { accessToken, refreshToken };
     }
 }
 
