@@ -1,59 +1,29 @@
-import { useEffect, useState } from "react";
-import { getTasks, Task } from "../api/taskService";
+import { Task } from "../api/taskService";
 import TaskItem from "./TaskItem";
 
 /**
  * @brief Task list component displaying all tasks.
- * @details Fetches tasks from the API and updates dynamically.
+ * @details Receives tasks as props and displays them in order of priority.
  */
-const TaskList = () => 
+const TaskList = ({ tasks, onTaskUpdated }: { tasks: Task[], onTaskUpdated: () => void }) => 
 {
-    const [tasks, setTasks] = useState<Task[]>([]);
-
-    /**
-     * @brief Fetches the task list from the API.
-     * @details Updates the state with the retrieved tasks.
-     */
-    const fetchTasks = async () => 
-    {
-        try 
-        {
-            const data = await getTasks();
-            setTasks(Array.isArray(data) ? data : []);
-        } 
-        catch (error) 
-        {
-            console.error("Error fetching tasks:", error);
-            setTasks([]);
-        }
-    };
-
-    /**
-     * @brief Loads tasks when the component is mounted.
-     */
-    useEffect(() => 
-    {
-        fetchTasks();
-    }, []);
+    const sortedTasks = [...tasks].sort((a, b) => { return b.priority - a.priority;});
 
     return (
         <div>
             <h2>Task List</h2>
 
-            {tasks.length === 0 ? (
+            {sortedTasks.length === 0 ? (
                 <p>No tasks found. Add a new one!</p>
             ) : (
                 <ul>
-                    {tasks
-                        .slice() 
-                        .sort((a, b) => b.priority - a.priority) 
-                        .map((task) => (
-                            <TaskItem
-                                key={task.id}
-                                task={task}
-                                onTaskUpdated={fetchTasks}
-                            />
-                        ))}
+                    {sortedTasks.map((task) => (
+                        <TaskItem
+                            key={task.id}
+                            task={task}
+                            onTaskUpdated={onTaskUpdated}
+                        />
+                    ))}
                 </ul>
             )}
         </div>
