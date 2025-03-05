@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import api from "../api/apiClient";
+import "./styles/Login.css";
 
 /**
  * @brief Login page for user authentication.
@@ -34,35 +35,48 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Email or Nickname"
-                    value={identifier}
-                    onChange={(e) => setIdentifier(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Login</button>
-            </form>
-            {error && <p>{error}</p>}
+        <div className="login-container">
+            <div className="login-box">
+                <h2 className="login-title">Login</h2>
+                <form onSubmit={handleSubmit} className="login-form">
+    <div className="input-container">
+        <input
+            type="text"
+            placeholder=" "
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
+            required
+            className="login-input"
+        />
+        <label className="input-label">Email or Nickname</label>
+    </div>
+
+    <div className="input-container">
+        <input
+            type="password"
+            placeholder=" "
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="login-input"
+        />
+        <label className="input-label">Password</label>
+    </div>
+
+    <button type="submit" className="login-button">Login</button>
+</form>
+
+                {error && <p className="login-error">{error}</p>}
     
-            <p>
-                Don't have an account?{" "}
-                <Link to="/register" style={{ textDecoration: "underline" }}>
-                    Register
-                </Link>
-            </p>
+                <p className="login-text">
+                    Don't have an account?{" "}
+                    <Link to="/register" className="login-link">Register</Link>
+                </p>
+            </div>
         </div>
     );
+    
+
 };
 
 export default Login;
