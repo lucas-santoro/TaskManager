@@ -1,0 +1,109 @@
+/* Garante que a página ocupe toda a tela sem overflow */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Remove scroll lateral */
+}
+
+.tasks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #121212;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    overflow: hidden; /* Remove possíveis scrolls indesejados */
+}
+
+/* Título e subtítulo */
+.tasks-title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.tasks-subtitle {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: #b0b0b0;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Lista de tarefas */
+.task-list-container {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+}
+
+/* Botão de criar tarefa */
+.create-task-button {
+    width: 100%;
+    height: 45px;
+    border-radius: 50px;
+    border: none;
+    background: #e0e0e0;
+    color: #4d4d4d;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff;
+    transition: all 0.2s ease-in-out;
+    margin-top: 15px;
+}
+
+.create-task-button:hover {
+    box-shadow: inset 2px 2px 5px #bcbcbc, inset -2px -2px 5px #ffffff, 2px 2px 5px #bcbcbc, -2px -2px 5px #ffffff;
+}
+
+/* Container do formulário de criação */
+.create-task-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 20px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 5px #0e0e0e, inset -2px -2px 5px #262626;
+}
+
+/* Inputs e selects do formulário */
+.create-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.create-task-input {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 16px;
+}
+
+.create-task-input::placeholder {
+    color: #aaa;
+}
+
+.create-task-select {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2a2a2a;
+    color: white;
+    font-size: 16px;
+}

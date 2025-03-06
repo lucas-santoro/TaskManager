@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/apiClient";
+import "./styles/Register.css";
 
-/**
- * @brief Registration page for new users.
- * @details Allows users to create an account by providing name, nickname, email, and password.
- */
-const Register = () => {
+const Register = () => 
+{
     const [name, setName] = useState("");
     const [nickname, setNickname] = useState("");
     const [email, setEmail] = useState("");
@@ -14,11 +12,8 @@ const Register = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    /**
-     * @brief Handles the registration form submission.
-     * @param event The form submission event.
-     */
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent) => 
+    {
         event.preventDefault();
         setError("");
 
@@ -29,45 +24,67 @@ const Register = () => {
         } 
         catch (error) 
         {
-            setError("Registration failed. Email or nickname may already be in use.");
+            setError("Registration failed. Try again.");
         }
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Full Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Nickname"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Register</button>
-            </form>
-            {error && <p>{error}</p>}
+        <div className="register-container">
+            <div className="register-box">
+                <h2 className="register-title">Register</h2>
+                <form onSubmit={handleSubmit} className="register-form">
+                    <div className="input-container">
+                        <input
+                            type="text"
+                            placeholder=" "
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                            className="register-input"
+                        />
+                        <label className="input-label">Full Name</label>
+                    </div>
+
+                    <div className="input-container">
+                        <input
+                            type="text"
+                            placeholder=" "
+                            value={nickname}
+                            onChange={(e) => setNickname(e.target.value)}
+                            required
+                            className="register-input"
+                        />
+                        <label className="input-label">Nickname</label>
+                    </div>
+
+                    <div className="input-container">
+                        <input
+                            type="email"
+                            placeholder=" "
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="register-input"
+                        />
+                        <label className="input-label">Email</label>
+                    </div>
+
+                    <div className="input-container">
+                        <input
+                            type="password"
+                            placeholder=" "
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="register-input"
+                        />
+                        <label className="input-label">Password</label>
+                    </div>
+
+                    <button type="submit" className="register-button">Register</button>
+                </form>
+                {error && <p className="register-error">{error}</p>}
+            </div>
         </div>
     );
 };
