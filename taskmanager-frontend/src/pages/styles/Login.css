@@ -31,8 +31,9 @@
         inset 0 0 12px -4px rgba(255, 255, 255, 0.12);
 }
 
-/* Logo */
 .logo {
+    align-self: center;
+    position: relative;
     width: 65px;
     height: 65px;
     background: linear-gradient(
@@ -45,9 +46,35 @@
         -8px -8px 16px rgba(255, 255, 255, 0.06);
     border-radius: 20px;
     border: 2px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Form */
+.logo::before {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    width: 50%;
+    height: 20%;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: 2.5px solid #fff;
+}
+
+.logo::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    border: 2.5px solid #fff;
+}
+
+
 .form {
     display: flex;
     flex-direction: column;
@@ -55,7 +82,6 @@
     width: 100%;
 }
 
-/* Header */
 .header {
     text-align: center;
     font-size: 24px;
@@ -64,9 +90,8 @@
     margin-bottom: 10px;
 }
 
-/* Inputs */
 .input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     border: none;
     border-radius: 12px;
@@ -74,13 +99,15 @@
     color: white;
     outline: none;
     font-size: 14px;
+    margin: 0 auto;
+    display: block;
 }
+
 
 .input:focus {
     border: 1px solid #fff;
 }
 
-/* Buttons */
 .button {
     width: 100%;
     height: 40px;
@@ -105,7 +132,6 @@
         0px 0px 8px rgba(255, 255, 255, 0.05);
 }
 
-/* Footer */
 .footer {
     text-align: center;
     color: var(--footer-color);
