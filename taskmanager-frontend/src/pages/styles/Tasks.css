@@ -1,4 +1,4 @@
-/* Ensures the page takes the full screen without overflow */
+/* Remove margens padrão e evita overflow lateral */
 body, html {
     margin: 0;
     padding: 0;
@@ -13,7 +13,7 @@ body, html {
     justify-content: flex-start;
     width: 100vw;
     min-height: 100vh;
-    background-color: #121212;
+    background-color: #272727;
     color: white;
     text-align: center;
     padding: 40px 20px;
@@ -22,14 +22,16 @@ body, html {
 
 /* Title and subtitle */
 .tasks-title {
-    font-size: 2rem;
+    font-size: 24px;
     font-weight: bold;
+    color: white;
+    margin-bottom: 5px;
 }
 
 .tasks-subtitle {
-    font-size: 1.2rem;
+    font-size: 16px;
     font-weight: normal;
-    color: #b0b0b0;
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 20px;
 }
 
@@ -40,22 +42,23 @@ body, html {
     margin-top: 20px;
 }
 
-/* Task creation form - Positioned ABOVE the task list */
+/* Task creation box */
 .create-task-container {
     width: 100%;
     max-width: 700px;
-    background-color: #1e1e1e;
-    padding: 15px;
-    border-radius: 18px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
+    background: #1e1e1e;
+    padding: 12px;
+    border-radius: 24px;
+    box-shadow:
+        inset 0 10px 20px rgba(255, 255, 255, 0.1),
+        inset 4px 0 12px rgba(255, 255, 255, 0.1),
+        inset 0 0 12px rgba(255, 255, 255, 0.1);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
-/* Task creation form layout */
+/* Task form (mantém tudo alinhado) */
 .create-task-form {
     display: flex;
     width: 100%;
@@ -64,47 +67,113 @@ body, html {
     justify-content: space-between;
 }
 
-/* Inputs and select dropdown */
+/* Inputs e Select */
 .create-task-input, .create-task-select {
     flex: 1;
-    background-color: #272727;
+    background: #3a3a3a;
     border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 12px;
     color: white;
-    font-size: 15px;
-    box-shadow: inset 2px 2px 5px #111, inset -2px -2px 5px #333;
+    font-size: 14px;
     outline: none;
-    transition: box-shadow 0.2s ease;
-    min-width: 0; /* Prevents inputs from stretching */
+    transition: all 0.2s ease;
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.3);
+    min-width: 0;
 }
 
-/* Adjusts priority input width */
+/* Efeito ao focar nos inputs */
+.create-task-input:focus, .create-task-select:focus {
+    border: 1px solid #fff;
+}
+
+/* Campo de prioridade menor */
 .create-task-input.priority {
-    flex: 0.5;
-    min-width: 70px;
+    flex: 0.2;
+    min-width: 50px;
+    text-align: center;
 }
 
-/* Ensures the Create button fits correctly */
+/* Botão "Create" agora dentro da barra */
 .create-task-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #555;
-    background: #e8e8e8;
-    border-radius: 50px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    background: #373737;
+    border-radius: 12px;
     cursor: pointer;
-    box-shadow: inset 4px 4px 10px #bcbcbc, inset -4px -4px 10px #ffffff;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease;
+    box-shadow:
+        inset 0px 3px 6px rgba(255, 255, 255, 0.6),
+        inset 0px -3px 6px rgba(0, 0, 0, 0.8);
     border: none;
-    flex-shrink: 0;
+    flex: 0 0 auto;
     min-width: 90px;
 }
 
+/* Botão hover */
 .create-task-button:hover {
-    box-shadow: inset 2px 2px 6px #bcbcbc, inset -2px -2px 6px #ffffff, 2px 2px 6px #0a0a0a, -2px -2px 6px #2a2a2a;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow:
+        inset 0px 3px 6px rgba(255, 255, 255, 0.6),
+        inset 0px -3px 6px rgba(0, 0, 0, 0.8),
+        0px 0px 8px rgba(255, 255, 255, 0.05);
 }
 
 .create-task-button:active {
     transform: scale(0.98);
-    box-shadow: inset 1px 1px 4px #bcbcbc, inset -1px -1px 4px #ffffff;
+}
+
+/* Task item */
+.task-item {
+    width: 100%;
+    background: #1e1e1e;
+    padding: 12px 16px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Task text */
+.task-text {
+    flex: 1;
+    font-size: 14px;
+    color: white;
+}
+
+/* Task actions */
+.task-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Task action buttons */
+.task-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #373737;
+    color: white;
+    font-size: 12px;
+    transition: 0.2s ease;
+    box-shadow:
+        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.task-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.task-button:active {
+    transform: scale(0.98);
 }
