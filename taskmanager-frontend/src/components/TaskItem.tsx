@@ -28,7 +28,7 @@ const TaskItem = ({ task, onTaskUpdated }: TaskItemProps) => {
     };
 
     return (
-        <div>
+        <div className="task-card">
             {isEditing ? (
                 <TaskForm
                     taskToEdit={task}
@@ -38,13 +38,24 @@ const TaskItem = ({ task, onTaskUpdated }: TaskItemProps) => {
                     }}
                 />
             ) : (
-                <div>
-                    <h3>{task.title}</h3>
-                    <p>{task.description}</p>
-                    <p><strong>Status:</strong> {task.status}</p>
-                    <p><strong>Priority:</strong> {task.priority}</p>
-                    <button onClick={() => setIsEditing(true)}>Edit</button>
-                    <button onClick={handleDelete}>Delete</button>
+                <div className="task-content">
+                    {/* Título e Descrição (lado esquerdo) */}
+                    <div className="task-info">
+                        <h3 className="task-title">{task.title}</h3>
+                        <p className="task-description">{task.description}</p>
+                    </div>
+
+                    {/* Status e Prioridade (centro) */}
+                    <div className="task-status-priority">
+                        <p className="task-status"><strong>Status:</strong> {task.status}</p>
+                        <p className="task-priority"><strong>Priority:</strong> {task.priority}</p>
+                    </div>
+
+                    {/* Botões (lado direito) */}
+                    <div className="task-buttons">
+                        <button className="edit-button" onClick={() => setIsEditing(true)}>Edit</button>
+                        <button className="delete-button" onClick={handleDelete}>Delete</button>
+                    </div>
                 </div>
             )}
         </div>

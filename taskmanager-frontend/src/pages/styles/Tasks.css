@@ -35,14 +35,7 @@ body, html {
     margin-bottom: 20px;
 }
 
-/* Task list container */
-.task-list-container {
-    width: 100%;
-    max-width: 700px;
-    margin-top: 20px;
-}
-
-/* Task creation box */
+/* Container do formulário de criação de tasks */
 .create-task-container {
     width: 100%;
     max-width: 700px;
@@ -58,7 +51,7 @@ body, html {
     align-items: center;
 }
 
-/* Task form (mantém tudo alinhado) */
+/* Task form */
 .create-task-form {
     display: flex;
     width: 100%;
@@ -84,11 +77,6 @@ body, html {
     min-width: 0;
 }
 
-/* Efeito ao focar nos inputs */
-.create-task-input:focus, .create-task-select:focus {
-    border: 1px solid #fff;
-}
-
 /* Campo de prioridade menor */
 .create-task-input.priority {
     flex: 0.2;
@@ -96,7 +84,7 @@ body, html {
     text-align: center;
 }
 
-/* Botão "Create" agora dentro da barra */
+/* Botão "Create" dentro da barra */
 .create-task-button {
     padding: 10px 18px;
     font-size: 14px;
@@ -114,7 +102,6 @@ body, html {
     min-width: 90px;
 }
 
-/* Botão hover */
 .create-task-button:hover {
     background: rgba(255, 255, 255, 0.2);
     box-shadow:
@@ -127,53 +114,105 @@ body, html {
     transform: scale(0.98);
 }
 
-/* Task item */
-.task-item {
+/* Task list container */
+.task-list-container {
     width: 100%;
-    background: #1e1e1e;
-    padding: 12px 16px;
-    border-radius: 12px;
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+/* Task cards agora são horizontais */
+.task-card {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border: solid 1px #bebebe;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 15px;
+    color: #fff;
+    box-shadow: 0px 8px 20px -10px #bbbbbb;
+    text-shadow: 0px 0px 5px #fff;
+    letter-spacing: 1px;
+    background-image: radial-gradient(circle 160px at 50% 120%, #353535, #1f1f1f);
     display: flex;
+    flex-direction: row; /* Mantém os elementos lado a lado */
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
-    box-shadow:
-        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
-        inset -2px -2px 5px rgba(0, 0, 0, 0.3);
+    gap: 20px;
 }
 
-/* Task text */
-.task-text {
+/* Organiza os elementos dentro do task-card */
+.task-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Informações da task (Título + Descrição) */
+.task-info {
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    text-align: left;
+}
+
+/* Status e prioridade no centro */
+.task-status-priority {
+    display: flex;
+    flex-direction: column;
     flex: 1;
-    font-size: 14px;
-    color: white;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
 }
 
-/* Task actions */
-.task-actions {
+/* Botões alinhados na direita */
+.task-buttons {
     display: flex;
     gap: 10px;
+    flex: 1;
+    justify-content: flex-end;
 }
 
-/* Task action buttons */
-.task-button {
-    padding: 8px 12px;
+/* Botões de editar e deletar */
+.edit-button, .delete-button {
+    padding: 6px 12px;
     border: none;
-    border-radius: 12px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 12px;
     background: #373737;
     color: white;
-    font-size: 12px;
-    transition: 0.2s ease;
     box-shadow:
         inset 2px 2px 5px rgba(255, 255, 255, 0.1),
         inset -2px -2px 5px rgba(0, 0, 0, 0.3);
+    transition: 0.2s ease;
 }
 
-.task-button:hover {
+.edit-button:hover, .delete-button:hover {
     background: rgba(255, 255, 255, 0.2);
 }
 
-.task-button:active {
+.edit-button:active, .delete-button:active {
     transform: scale(0.98);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 500px) {
+    .task-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .task-status-priority {
+        text-align: center;
+    }
+
+    .task-buttons {
+        justify-content: center;
+    }
 }
