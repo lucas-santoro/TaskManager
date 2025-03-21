@@ -182,27 +182,53 @@ body, html {
     justify-content: flex-end;
 }
 
-/* Botões de editar e deletar */
-.edit-button, .delete-button {
-    padding: 6px 12px;
+/* Botão de editar */
+.edit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6em;
     border: none;
-    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 1.25em;
+    transition: all 0.2s linear;
     cursor: pointer;
-    font-size: 12px;
-    background: #373737;
-    color: white;
-    box-shadow:
-        inset 2px 2px 5px rgba(255, 255, 255, 0.1),
-        inset -2px -2px 5px rgba(0, 0, 0, 0.3);
-    transition: 0.2s ease;
 }
 
-.edit-button:hover, .delete-button:hover {
-    background: rgba(255, 255, 255, 0.2);
+
+.edit-button:hover {
+    box-shadow: 
+        3px 2px 4px rgba(255, 255, 255, 0.1),
+        8px 6px 12px rgba(255, 255, 255, 0.15),
+        16px 12px 24px rgba(255, 255, 255, 0.2);
 }
 
-.edit-button:active, .delete-button:active {
-    transform: scale(0.98);
+/* Botão de deletar */
+.delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.6em;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 1.25em;
+    transition: all 0.2s linear;
+    cursor: pointer;
+}
+
+.edit-button svg, .delete-button svg {
+    stroke: white !important;
+}
+
+/* Remove qualquer efeito de cor no hover */
+.edit-button:hover svg, .delete-button:hover svg {
+    stroke: white !important;
+}
+.delete-button:hover {
+    box-shadow: 
+        3px 2px 4px rgba(255, 0, 0, 0.1),
+        8px 6px 12px rgba(255, 0, 0, 0.15),
+        16px 12px 24px rgba(255, 0, 0, 0.2);
 }
 
 /* Responsividade para telas menores */
@@ -221,27 +247,3 @@ body, html {
         justify-content: center;
     }
 }
-
-/* Remove tooltip completamente */
-.delete-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1em;
-    border: 0px solid transparent;
-    background-color: rgba(255, 77, 77, 0.08);
-    border-radius: 1.25em;
-    transition: all 0.2s linear;
-    cursor: pointer;
-}
-
-/* Efeito de hover */
-.delete-button:hover {
-    box-shadow: 
-        3.4px 2.5px 4.9px rgba(255, 0, 0, 0.025),
-        8.6px 6.3px 12.4px rgba(255, 0, 0, 0.035),
-        17.5px 12.8px 25.3px rgba(255, 0, 0, 0.045),
-        36.1px 26.3px 52.2px rgba(255, 0, 0, 0.055),
-        99px 72px 143px rgba(255, 0, 0, 0.08);
-}
-
