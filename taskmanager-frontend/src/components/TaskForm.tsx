@@ -47,6 +47,7 @@ const TaskForm = ({ taskToEdit, onTaskUpdated }: TaskFormProps) =>
                 placeholder="Title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
+                maxLength={20}
                 required
                 className="create-task-input"
             />
@@ -56,6 +57,7 @@ const TaskForm = ({ taskToEdit, onTaskUpdated }: TaskFormProps) =>
                 placeholder="Description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                maxLength={140}
                 className="create-task-input"
             />
 

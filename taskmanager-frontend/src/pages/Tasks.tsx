@@ -90,6 +90,7 @@ const Tasks = () =>
                         className="create-task-input" 
                         value={title} 
                         onChange={(e) => setTitle(e.target.value)}
+                        maxLength={20}
                         required 
                     />
                     <input 
@@ -98,6 +99,7 @@ const Tasks = () =>
                         className="create-task-input" 
                         value={description} 
                         onChange={(e) => setDescription(e.target.value)}
+                        maxLength={140}
                     />
                     <select 
                         className="create-task-select" 
