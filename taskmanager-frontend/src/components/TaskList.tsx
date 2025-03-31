@@ -44,13 +44,16 @@ const TaskList = () =>
                 <p>No tasks found. Add a new one!</p>
             ) : (
                 <ul>
-                    {tasks.map((task) => (
-                        <TaskItem
-                            key={task.id}
-                            task={task}
-                            onTaskUpdated={fetchTasks}
-                        />
-                    ))}
+                    {tasks
+                        .slice() 
+                        .sort((a, b) => b.priority - a.priority) 
+                        .map((task) => (
+                            <TaskItem
+                                key={task.id}
+                                task={task}
+                                onTaskUpdated={fetchTasks}
+                            />
+                        ))}
                 </ul>
             )}
         </div>
