@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getTasks, createTask, Task } from "../api/taskService";
-import TaskItem from "../components/TaskItem";
+import TaskList from "../components/TaskList";
 
 import "./styles/Tasks.css";
 
@@ -115,7 +115,7 @@ const Tasks = () =>
                         placeholder="Priority" 
                         className="create-task-input priority" 
                         value={priority} 
-                        onChange={(e) => setPriority(e.target.value)}
+                        onChange={(e) => setPriority(e.target.value ? parseInt(e.target.value).toString() : "")}
                         required 
                     />
                     <button type="submit" className="create-task-button">Create</button>
@@ -123,21 +123,7 @@ const Tasks = () =>
             </div>
 
             {/* Task list */}
-            <div className="task-list-container">
-                {tasks.length === 0 ? (
-                    <p>No tasks found. Add a new one!</p>
-                ) : (
-                    <div className="task-cards">
-                        {tasks.map((task) => (
-                            <TaskItem
-                                key={task.id}
-                                task={task}
-                                onTaskUpdated={fetchTasks}
-                            />
-                        ))}
-                    </div>
-                )}
-            </div>
+            <TaskList tasks={tasks} onTaskUpdated={fetchTasks} />
         </div>
     );
 };
