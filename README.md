@@ -7,11 +7,12 @@
 
 ### 🌟 Features
 
-- User authentication with **JWT**
+- User authentication with JWT
 - Secure route protection
 - Task creation, updating, and deletion
 - Task prioritization and status management
 - Fully documented API & database structure
+- Easy setup and deployment using Docker
 
 Whether you're looking to learn, contribute, or extend its functionality, **Task Manager** is open for experimentation.
 
@@ -44,6 +45,7 @@ Full documentation is available in the [`docs/`](./docs/) folder:
 - [🎨 Frontend & User Flow](./docs/frontend.md)
 - [🔑 Authentication & Route Protection](./docs/authentication.md)
 - [🤝 Contribution Guide](./docs/contribution.md)
+- [🚰 Docker Setup](docs/docker.md)
 - [❓ FAQ](./docs/faq.md)
 
 ---
@@ -57,7 +59,23 @@ git clone https://github.com/lucas-santoro/TaskManager.git
 cd TaskManager
 ```
 
-### 2️⃣ Install dependencies
+### 2️⃣ Run with Docker (Recommended)
+
+If you have Docker installed, you can run the full application with one command:
+
+```sh
+docker-compose up --build
+```
+
+Then access:
+- Frontend: http://localhost:5173
+- Backend: http://localhost:5000
+
+More info in [Docker Setup](./docs/docker.md).
+
+### 3️⃣ Manual Setup (Without Docker)
+
+#### 🔧 Install dependencies
 
 - **Backend:**
 
@@ -73,7 +91,7 @@ cd ../taskmanager-frontend
 npm install
 ```
 
-### 3️⃣ Set up environment variables
+#### 🔐 Set up environment variables
 
 Copy the example `.env` files and configure them:
 
@@ -82,7 +100,7 @@ cp taskmanager-backend/.env.example taskmanager-backend/.env
 cp taskmanager-frontend/.env.example taskmanager-frontend/.env
 ```
 
-### 4️⃣ Set up the database
+#### 🧱 Set up the database
 
 Before running the backend, make sure the database is set up correctly:
 
@@ -92,7 +110,7 @@ psql -U your_user -d your_database -f taskmanager-backend/database/schema.sql
 
 This command will create all necessary tables as defined in the schema file.
 
-### 5️⃣ Start the project
+#### ▶️ Start the project manually
 
 - **Backend:**
 
@@ -119,4 +137,3 @@ Want to contribute? Check out our [contribution guide](./docs/contribution.md).
 ## 📜 License
 
 This project is licensed under the **MIT License**. See the [`LICENSE`](./LICENSE) file for more details.
-
